@@ -1,7 +1,11 @@
 // docs: https://developers.printify.com
 import axios            from "axios";
 
-import IOptions from "./sdk/interface/iOptions";
+import IOptions         from "@interface/iOptions";
+
+import TProductVariant  from "@type/product/tProductVariant";
+import TProductData     from "@type/product/tProductData";
+
 
 // V1 WRAPPER CLASS
 class Printify {
@@ -70,6 +74,11 @@ class Printify {
         return await this.request("GET", `v1/shops/${shopId}/products/${productId}.json`);
     }
 
+}
+
+export {
+    TProductVariant,
+    TProductData
 }
 
 export default Printify;
