@@ -22,6 +22,7 @@ class Printify {
             headers: {
                 'Authorization': `Bearer ${this.key}`,
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             }
         })
     }
@@ -32,7 +33,7 @@ class Printify {
                 method,
                 url,
                 data,
-                mode: 'no-cors'
+
             });
 
             return response.data;
