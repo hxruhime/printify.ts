@@ -86,6 +86,11 @@ class Printify {
         return await this.request("POST", `v1/shops/${shopId}/products/${productId}/publish.json`);
     }
 
+    // set a product to publish succeeded
+    async postProductPublishSuccess(shopId: string, productId: string): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/products/${productId}/publishing_succeeded.json`);
+    }
+
 }
 
 export {

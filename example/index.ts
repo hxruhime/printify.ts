@@ -22,10 +22,6 @@ const main = async () => {
     // products
     console.log(await printify.getProducts(''))
 
-    await printify.postProductPublish('', '')
-    await printify.postProductPublish('', '')
-    await printify.postProductPublish('', '')
-
     console.log("=================================")
 }
 
