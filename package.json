@@ -1,6 +1,6 @@
 {
   "name": "printify.ts",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Unofficial printify.com API wrapper",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
