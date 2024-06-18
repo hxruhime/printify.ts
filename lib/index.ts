@@ -32,6 +32,7 @@ class Printify {
                 method,
                 url,
                 data,
+                mode: 'no-cors'
             });
 
             return response.data;
