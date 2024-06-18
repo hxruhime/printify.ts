@@ -4,8 +4,9 @@ import axios            from "axios";
 import IOptions         from "@interface/iOptions";
 
 import TProductVariant  from "@type/product/tProductVariant";
+import TProductLinks    from "@type/product/tProductLinks";
 import TProductData     from "@type/product/tProductData";
-
+import TProducts        from "@type/product/tProducts";
 
 // V1 WRAPPER CLASS
 class Printify {
@@ -78,7 +79,9 @@ class Printify {
 
 export {
     TProductVariant,
-    TProductData
+    TProductLinks,
+    TProductData,
+    TProducts
 }
 
 export default Printify;
