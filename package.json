@@ -1,0 +1,36 @@
+{
+  "name": "printify.ts",
+  "version": "1.0.0",
+  "description": "Unofficial printify.com API wrapper",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "test": "node dist/example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hxruhime/printify.ts.git"
+  },
+  "keywords": [
+    "printify",
+    "api",
+    "wrapper",
+    "typescript"
+  ],
+  "author": "David",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/hxruhime/printify.ts/issues"
+  },
+  "homepage": "https://github.com/hxruhime/printify.ts",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "dotenv": "^16.3.1",
+    "tsc-alias": "^1.8.8"
+  }
+}
