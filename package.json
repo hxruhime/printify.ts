@@ -1,12 +1,12 @@
 {
   "name": "printify.ts",
-  "version": "1.0.4",
+  "version": "1.0.41",
   "description": "Unofficial printify.com API wrapper",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "test": "node dist/example"
+    "test": "npm run build && node dist/example"
   },
   "repository": {
     "type": "git",

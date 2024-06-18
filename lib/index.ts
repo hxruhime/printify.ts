@@ -77,6 +77,15 @@ class Printify {
         return await this.request("GET", `v1/shops/${shopId}/products/${productId}.json`);
     }
 
+    // create product
+    // update
+    //delete
+
+    // publish a product
+    async postProductPublish(shopId: string, productId: string): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/products/${productId}/publish.json`);
+    }
+
 }
 
 export {
