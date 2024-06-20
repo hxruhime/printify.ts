@@ -53,44 +53,166 @@ class Printify {
     // shops
     ///////////////////////////////////////////////
 
-    // get all shops
+    // Retrieve a list of existing shops in a Printify account
     async getShops(): Promise<any[]> {
         return await this.request("GET", "v1/shops.json");
     }
 
-    // disconnect a shop from a printify account
-    async deleteShop(id: string): Promise<any> {
-        return await this.request("DELETE", `v1/shops/${id}/connection.json`);
+    // Disconnect a shop from a Printify account
+    async deleteShop(shopId: string): Promise<any> {
+        return await this.request("DELETE", `v1/shops/${shopId}/connection.json`);
+    }
+
+    ///////////////////////////////////////////////
+    // catalog
+    ///////////////////////////////////////////////
+
+    // Retrieve a list of all available blueprints
+    async getBlueprints(): Promise<any[]> {
+        return await this.request("GET", "v1/catalog/blueprints.json");
+    }
+
+    // Retrieve a specific blueprint
+    async getBlueprint(blueprintId: string): Promise<any> {
+        return await this.request("GET", `v1/catalog/blueprints/${blueprintId}.json`);
+    }
+
+    // Retrieve a list of all print providers that fulfill orders for a specific blueprint
+    async getBlueprintProviders(blueprintId: string): Promise<any[]> {
+        return await this.request("GET", `v1/catalog/blueprints/${blueprintId}/print_providers.json`);
+    }
+
+    // Retrieve a list of all variants of a blueprint from a specific print provider
+    async getBlueprintVariants(blueprintId: string, printProviderId: string): Promise<any[]> {
+        return await this.request("GET", `v1/catalog/blueprints/${blueprintId}/print_providers/${printProviderId}/variants.json`);
+    }
+
+    // Retrieve the shipping information for all variants of a blueprint from a specific print provider
+    async getBlueprintShipping(blueprintId: string, printProviderId: string): Promise<any[]> {
+        return await this.request("GET", `v1/catalog/blueprints/${blueprintId}/print_providers/${printProviderId}/shipping.json`);
+    }
+
+    // Retrieve a list of all print providers
+    async getPrintProviders(): Promise<any[]> {
+        return await this.request("GET", "v1/catalog/print_providers.json");
+    }
+
+    // Retrieve a specific print-provider and a list of associated blueprint offerings
+    async getPrintProvider(printProviderId: string): Promise<any[]> {
+        return await this.request("GET", `v1/catalog/print_providers/${printProviderId}.json`);
     }
 
     ///////////////////////////////////////////////
     // products
     ///////////////////////////////////////////////
 
-    // get all products from a shop
+    // Retrieve a list of all products
     async getProducts(shopId: string): Promise<any[]> {
         return await this.request("GET", `v1/shops/${shopId}/products.json`);
     }
 
-    // get a specific product from a shop
+    // Retrieve a product
     async getProduct(shopId: string, productId: string): Promise<any> {
         return await this.request("GET", `v1/shops/${shopId}/products/${productId}.json`);
     }
 
-    // create product
-    // update
-    //delete
+    // Create a new product
+    async createProduct(shopId: string, productData: TProductData): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/products.json`, productData);
+    }
 
-    // publish a product
+    // Update a product
+    async updateProduct(shopId: string, productId: string, productData: TProductData): Promise<any> {
+        return await this.request("PUT", `v1/shops/${shopId}/products/${productId}.json`, productData);
+    }
+
+    // Delete a product
+    async deleteProduct(shopId: string, productId: string): Promise<any> {
+        return await this.request("DELETE", `v1/shops/${shopId}/products/${productId}.json`);
+    }
+
+    // Publish a product
     async postProductPublish(shopId: string, productId: string): Promise<any> {
         return await this.request("POST", `v1/shops/${shopId}/products/${productId}/publish.json`);
     }
 
-    // set a product to publish succeeded
+    // Set product publish status to succeeded
     async postProductPublishSuccess(shopId: string, productId: string): Promise<any> {
         return await this.request("POST", `v1/shops/${shopId}/products/${productId}/publishing_succeeded.json`);
     }
 
+    // Set product publish status to failed
+    async postProductPublishFailed(shopId: string, productId: string): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/products/${productId}/publishing_failed.json`);
+    }
+
+    // Notify that a product has been unpublished
+    async postProductUnpublish(shopId: string, productId: string): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/products/${productId}/unpublish.json`);
+    }
+
+    ///////////////////////////////////////////////
+    // orders
+    ///////////////////////////////////////////////
+
+    // Retrieve a list of orders
+    async getOrders(shopId: string): Promise<any[]> {
+        return await this.request("GET", `v1/shops/${shopId}/orders.json`);
+    }
+
+    // Get order details by id
+    async getOrder(shopId: string, orderId: string): Promise<any> {
+        return await this.request("GET", `v1/shops/${shopId}/orders/${orderId}.json`);
+    }
+
+    // Submit an order
+    async postOrder(shopId: string, orderData: any): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/orders.json`, orderData);
+    }
+
+    // Submit a Printify Express order
+    async postOrderExpress(shopId: string, orderData: any): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/orders/express.json`, orderData);
+    }
+
+    // Send an existing order to production
+    async postOrderSendToProduction(shopId: string, orderId: string): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/orders/${orderId}/send_to_production.json`);
+    }
+
+    // Calculate the shipping cost of an order
+    async postOrderShippingCost(shopId: string, orderData: any): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/orders/shipping_cost.json`, orderData);
+    }
+
+    // Cancel an unpaid order
+    async cancelOrder(shopId: string, orderId: string): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/orders/${orderId}/cancel.json`);
+    }
+
+    ///////////////////////////////////////////////
+    // webhooks
+    ///////////////////////////////////////////////
+
+    // Retrieve a list of webhooks
+    async getWebhooks(shopId: string): Promise<any[]> {
+        return await this.request("GET", `v1/shops/${shopId}/webhooks.json`);
+    }
+
+    // Create a new webhook
+    async createWebhook(shopId: string, webhookData: any): Promise<any> {
+        return await this.request("POST", `v1/shops/${shopId}/webhooks.json`, webhookData);
+    }
+
+    // Modify a webhook
+    async updateWebhook(shopId: string, webhookId: string, webhookData: any): Promise<any> {
+        return await this.request("PUT", `v1/shops/${shopId}/webhooks/${webhookId}.json`, webhookData);
+    }
+
+    // Delete a webhook
+    async deleteWebhook(shopId: string, webhookId: string): Promise<any> {
+        return await this.request("DELETE", `v1/shops/${shopId}/webhooks/${webhookId}.json`);
+    }
 }
 
 export {
